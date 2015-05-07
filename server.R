@@ -34,12 +34,16 @@ shinyServer(function(input, output) {
       ggplot(downloads(), aes(date, count, colour = package)) +
         geom_line() +
         geom_point() +
-        ylim(y_range())
+        ylim(y_range()) +
+        xlab(NULL) +
+        ylab("Daily downloads")
     } else {
       ggplot(downloads(), aes(date, colour = package)) +
         geom_line(aes(y = trend)) +
         geom_linerange(aes(ymin = trend, ymax = trend + remainder), colour = "grey70") +
-        ylim(y_range())
+        ylim(y_range()) +
+        xlab(NULL) +
+        ylab("Daily downloads (smoothed)")
     }
   })
 
