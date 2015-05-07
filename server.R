@@ -17,6 +17,13 @@ shinyServer(function(input, output) {
   pkgs <- reactive(strsplit(input$packages, ", ?")[[1]])
   downloads <- reactive({
     df <- cranlogs::cran_downloads(pkgs(), from = input$from, to = input$to)
+
+    last_week <- filter(df, date > max(date) - 7) %>%
+      group_by(package) %>%
+      summarise(avg = mean(count, na.rm = TRUE)) %>%
+      arrange(desc(avg))
+    df <- df %>% mutate(package = factor(package, levels = last_week$package))
+
     df %>% group_by(package) %>% do(show_trend(.))
   })
 
