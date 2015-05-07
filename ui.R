@@ -11,7 +11,8 @@ shinyUI(fluidPage(
     sidebarPanel(
       textInput("packages", "Packages", paste(top5, collapse = ", ")),
       dateInput("from", "From", last_month),
-      dateInput("to", "To", today)
+      dateInput("to", "To", today),
+      checkboxInput("showTrend", "Show trend")
     ),
 
     mainPanel(
