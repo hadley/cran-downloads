@@ -16,7 +16,7 @@ show_trend <- function(df) {
 shinyServer(function(input, output) {
   pkgs <- reactive(strsplit(input$packages, ", ?")[[1]])
   downloads <- reactive({
-    df <- cranlogs::cran_downloads(pkgs(), from = input$from, to = input$to)
+    df <- cranlogs::cran_downloads(pkgs(), from = input$range[1], to = input$range[2])
 
     last_week <- filter(df, date > max(date) - 7) %>%
       group_by(package) %>%
