@@ -15,7 +15,10 @@ shinyUI(fluidPage(
     ),
 
     mainPanel(
-      plotOutput("trend"),
+      plotOutput("trend",
+        brush = brushOpts("brush", direction = "x", resetOnNew = TRUE),
+        dblclick = "click"
+      ),
       HTML(
         "<p>Data from <a href='https://github.com/metacran/cranlogs'>cranlogs</a>.",
         "Code on <a href='https://github.com/hadley/cran-downloads'>github</a>.</p>"

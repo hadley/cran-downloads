@@ -3,17 +3,22 @@ library(ggplot2)
 library(shiny)
 library(dplyr)
 
+today <- Sys.Date() - 1
+last_month <- today - 60
 
 show_trend <- function(df) {
   count_ts <- ts(df$count, frequency = 7)
-  stl <- as.data.frame(stl(count_ts, "periodic")$time.series)
+  stl <- tryCatch(
+    as.data.frame(stl(count_ts, "periodic")$time.series),
+    error = function(e) data.frame(trend = df$count, remainder = 0)
+  )
 
   df$trend <- stl$trend
   df$remainder <- stl$remainder
   df
 }
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   pkgs <- reactive(strsplit(input$packages, ", ?")[[1]])
   downloads <- reactive({
     df <- cranlogs::cran_downloads(pkgs(), from = input$range[1], to = input$range[2])
@@ -28,6 +33,24 @@ shinyServer(function(input, output) {
   })
 
   y_range <- reactive(range(downloads()$count, downloads()$trend + downloads()$remainder))
+
+  observe({
+    if (is.null(input$brush))
+      return()
+
+    start <- structure(input$brush$xmin, class = "Date")
+    end <- structure(input$brush$xmax, class = "Date")
+    updateDateRangeInput(session, "range", start = start, end = end)
+  })
+
+  observe({
+    if (is.null(input$click))
+      return()
+
+    updateDateRangeInput(session, "range", start = last_month, end = today)
+  })
+
+
 
   output$trend <- renderPlot({
     if (!input$showTrend) {
