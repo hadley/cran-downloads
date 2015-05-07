@@ -1,0 +1,8 @@
+name: cran-downloads
+account: hadley
+server: shinyapps.io
+bundleId: 182593
+url: http://hadley.shinyapps.io/cran-downloads
+when: 1431007457.28075
+asMultiple: FALSE
+asStatic: FALSE
