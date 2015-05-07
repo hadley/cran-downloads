@@ -15,7 +15,8 @@ shinyUI(fluidPage(
     ),
 
     mainPanel(
-      plotOutput("trend")
+      plotOutput("trend"),
+      HTML("<p>Data from <a href='https://github.com/metacran/cranlogs'>cranlogs</a></p>")
     )
   )
 ))
