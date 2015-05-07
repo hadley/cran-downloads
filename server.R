@@ -33,7 +33,6 @@ shinyServer(function(input, output) {
     if (!input$showTrend) {
       ggplot(downloads(), aes(date, count, colour = package)) +
         geom_line() +
-        geom_point() +
         ylim(y_range()) +
         xlab(NULL) +
         ylab("Daily downloads")
