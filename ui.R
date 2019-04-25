@@ -20,7 +20,7 @@ shinyUI(fluidPage(
         dblclick = "click"
       ),
       HTML(
-        "<p>Data from <a href='https://github.com/metacran/cranlogs'>cranlogs</a>.",
+        "<p>Data from <a href='https://r-hub.github.io/cranlogs/'>cranlogs</a>.",
         "Code on <a href='https://github.com/hadley/cran-downloads'>github</a>.</p>"
       )
     )
