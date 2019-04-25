@@ -1,6 +1,6 @@
 # cran-downloads
 
-A shiny app to visualise CRAN downloads with data from the [cranlogs](http://r-hub.github.io/cranlogs/) package.
+A shiny app to visualise CRAN downloads with data from the [cranlogs](https://r-hub.github.io/cranlogs/) package.
 
 Live app at <https://hadley.shinyapps.io/cran-downloads/>
 
